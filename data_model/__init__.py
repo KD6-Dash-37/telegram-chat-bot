@@ -1,0 +1,1 @@
+from data_model.load_config import BotConfig
