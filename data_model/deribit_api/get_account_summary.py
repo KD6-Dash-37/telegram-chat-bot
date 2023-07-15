@@ -1,7 +1,7 @@
 # get_account_summary
 # https://docs.deribit.com/#private-get_account_summary
 from pydantic import BaseModel
-from typing import Optional
+
 
 class AccountSummaryResult(BaseModel):
     available_funds: float

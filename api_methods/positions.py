@@ -1,25 +1,24 @@
 import json
 import logging
-from websockets.client import WebSocketClientProtocol
-from data_model import AccountSummaryResponse, ErrorResponse
 from pydantic import ValidationError
+from websockets.client import WebSocketClientProtocol
+from data_model import GetPositionsResponse, ErrorResponse, Position
 
-log = logging.getLogger(__name__)
+
+log = logging.getLogger("delta-hedger")
 
 
-async def get_account_summary(
-        websocket: WebSocketClientProtocol, currency: str
-) -> AccountSummaryResponse:
+async def get_positions(websocket: WebSocketClientProtocol, currency: str):
 
-    log.debug(f"requesting {currency} account summary")
+    log.debug(f"requesting all {currency} positions")
 
     msg = {
         "jsonrpc" : "2.0",
-        "method": "private/get_account_summary",
-        "params": {
-            "currency": currency
+        "method" : "private/get_positions",
+        "params" : {
+            "currency" : currency,
+            }
         }
-    }
 
     msg = json.dumps(msg)
 
@@ -31,7 +30,9 @@ async def get_account_summary(
 
     try:
 
-        response = AccountSummaryResponse.model_validate(response)
+        response = GetPositionsResponse.model_validate(response)
+
+        log.debug(f"successfully parsed and validated {currency} positions")
 
         return response
 
@@ -44,7 +45,7 @@ async def get_account_summary(
             error = error_response.error
 
             log.critical((
-                f"failed to parse and validate get_account_summary response for {currency} "
+                f"failed to parse and validate get_positions response for {currency} "
                 f"{error.message} : {error.code}"
             ))
 
@@ -53,7 +54,7 @@ async def get_account_summary(
         except ValidationError as ex:
 
             log.exception(
-                "unknown api response received for get_account_summary",
+                "unknown api response received for get_positions",
                 exc_info=True,
                 stack_info=True
             )
