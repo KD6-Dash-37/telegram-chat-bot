@@ -1,1 +1,4 @@
 from data_model.load_config import BotConfig
+from data_model.deribit_api.auth import AuthResponse, AuthResult
+from data_model.deribit_api.error import ErrorResponse
+from data_model.deribit_api.get_account_summary import AccountSummaryResponse

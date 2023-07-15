@@ -3,3 +3,4 @@
 .env
 __pycache__
 bot_configs
+api_methods/example_responses
