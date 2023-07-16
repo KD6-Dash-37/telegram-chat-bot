@@ -4,7 +4,7 @@ import yaml
 
 from data_model import BotConfig
 
-CONFIG_DIR = "bot_configs"
+CONFIG_DIR = "/bot_configs"
 
 def load_config_file(bot_name: str):
 

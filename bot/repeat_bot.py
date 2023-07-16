@@ -20,7 +20,7 @@ class PostHelp:
         self.cfg = cfg
 
     async def post_help_info(self, update: Update, context: ContextTypes.DEFAULT_TYPE): # pylint: disable=W0613
-
+ 
         if await verify_user(update=update, auth_users=self.cfg.auth.telegram.users):
 
             text = [
@@ -88,7 +88,7 @@ class SetTimer:
     async def set_timer(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         if await verify_user(update=update, auth_users=self.cfg.auth.telegram.users):
-
+            
             try:
 
                 interval = float(context.args[0])

@@ -4,6 +4,6 @@
 .dockerignore
 dockerfile
 __pycache__
-bot_configs
+bot_configs/*
 api_methods/example_responses
-foo.py
+rundocker.sh

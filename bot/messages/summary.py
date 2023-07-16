@@ -98,7 +98,9 @@ def construct_account_message(account_summary_response: AccountSummaryResponse) 
 
     balance = f"\nMargin balance: {margin_balance}"
 
-    msg = title + im + mm + balance
+    delta_total = f"\n Net delta: {account_data.delta_total}"
+
+    msg = title + im + mm + balance + delta_total
 
     return msg
 
