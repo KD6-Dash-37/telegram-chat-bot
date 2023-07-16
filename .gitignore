@@ -6,3 +6,4 @@ dockerfile
 __pycache__
 bot_configs
 api_methods/example_responses
+foo.py
