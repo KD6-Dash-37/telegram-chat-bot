@@ -1,14 +1,16 @@
-from bot import repeat_bot
+from bot import bots
 from utils import create_logs
 
 
-def main(bot_name):
+def main(bot_type, bot_name):
 
     create_logs()
 
-    repeat_bot(bot_name=bot_name)
+    bot = bots.get(bot_type)
+
+    bot(bot_name=bot_name)
 
 
 if __name__ == "__main__":
 
-    main(bot_name="bot1")
+    main(bot_type="repeat_bot", bot_name="EfrenReyes")

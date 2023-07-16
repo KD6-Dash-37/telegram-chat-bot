@@ -1,5 +1,4 @@
 # summary.py
-import asyncio
 import os
 
 import websockets
@@ -7,13 +6,17 @@ from dotenv import load_dotenv
 import emoji
 
 from api_methods import authenticate_websocket, get_account_summary, get_positions
-from data_model import AccountSummaryResponse, GetPositionsResponse
+from data_model import AccountSummaryResponse, GetPositionsResponse, BotConfig
+
+
 load_dotenv()
 
 
-async def summary_message(currency: str):
+async def account_summary(cfg: BotConfig) -> str:
 
-    account_summary_response, position_response = await get_account_data(currency=currency)
+    currency = cfg.message_type.currency
+
+    account_summary_response, position_response = await get_account_data(currency=currency, cfg=cfg)
 
     account_msg = construct_account_message(
         account_summary_response=account_summary_response
@@ -30,12 +33,12 @@ async def summary_message(currency: str):
 
 
 async def get_account_data(
-        currency: str
+        currency: str, cfg: BotConfig
 ) -> tuple[AccountSummaryResponse, GetPositionsResponse]:
-
+    
     async with websockets.connect(os.environ.get("ENDPOINT")) as websocket:
 
-        await authenticate_websocket(websocket=websocket)
+        await authenticate_websocket(websocket=websocket, cfg=cfg)
 
         account_data = await get_account_summary(
             websocket=websocket,
@@ -125,6 +128,3 @@ def construct_position_message(
     msg += "\nNo active positions"
 
     return msg
-
-
-asyncio.run(summary_message(currency="BTC"))

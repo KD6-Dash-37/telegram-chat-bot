@@ -4,14 +4,13 @@ import yaml
 
 from data_model import BotConfig
 
+CONFIG_DIR = "bot_configs"
 
 def load_config_file(bot_name: str):
 
     file_name = ".".join([bot_name, "yaml"])
 
-    config_dir = os.path.join("/", *os.getcwd().split("/")[:-1], "bot_configs")
-
-    config_file_path = os.path.join(config_dir, file_name)
+    config_file_path = os.path.join(CONFIG_DIR, file_name)
 
     if os.path.exists(config_file_path):
 

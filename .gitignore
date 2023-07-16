@@ -1,6 +1,8 @@
 .venv
 .vscode
 .env
+.dockerignore
+dockerfile
 __pycache__
 bot_configs
 api_methods/example_responses
