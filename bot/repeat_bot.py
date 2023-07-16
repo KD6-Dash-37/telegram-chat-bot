@@ -65,7 +65,7 @@ class StopRepeatMessage:
         if len(current_jobs) > 0:
 
             for job in current_jobs:
-  
+
                 job.schedule_removal()
 
             await update.effective_message.reply_text(
@@ -146,9 +146,9 @@ class Jobs:
             await update.effective_message.reply_text(text=text)
 
 
-def repeat_bot(bot_name: str):
+def repeat_bot(cfg: BotConfig):
 
-    cfg = load_config(bot_name=bot_name)
+    # cfg = load_config(bot_name=bot_name)
 
     post_help = PostHelp(cfg=cfg)
 

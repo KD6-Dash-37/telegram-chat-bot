@@ -1,16 +1,20 @@
+# main.py
+import sys
 from bot import bots
-from utils import create_logs
+from utils import create_logs, load_config
 
 
-def main(bot_type, bot_name):
+def main(bot_name):
 
     create_logs()
 
-    bot = bots.get(bot_type)
+    cfg = load_config(bot_name=bot_name)
 
-    bot(bot_name=bot_name)
+    bot = bots.get(cfg.bot_type)
+
+    bot(cfg=cfg)
 
 
 if __name__ == "__main__":
 
-    main(bot_type="repeat_bot", bot_name="EfrenReyes")
+    main(sys.argv[1])

@@ -31,6 +31,7 @@ class MessageType(BaseModel):
 class BotConfig(BaseModel):
     
     name: str
+    bot_type: str
     auth: AuthConfig
     chat: ChatConfig
     message_type: MessageType
